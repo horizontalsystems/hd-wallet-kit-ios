@@ -1,5 +1,5 @@
 Pod::Spec.new do |spec|
-  spec.name = 'HDWalletKit'
+  spec.name = 'HSHDWalletKit'
   spec.version = '0.1.0'
   spec.summary = 'HDWallet library for Swift'
   spec.description = <<-DESC
@@ -19,4 +19,6 @@ Pod::Spec.new do |spec|
 
   spec.pod_target_xcconfig = { 'SWIFT_WHOLE_MODULE_OPTIMIZATION' => 'YES',
                                'APPLICATION_EXTENSION_API_ONLY' => 'YES' }
+
+  spec.dependency 'HSCryptoKit'
 end

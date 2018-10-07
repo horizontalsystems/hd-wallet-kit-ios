@@ -1,5 +1,5 @@
 import Foundation
-import CryptoKit
+import HSCryptoKit
 
 public class HDPrivateKey {
     let xPrivKey: UInt32

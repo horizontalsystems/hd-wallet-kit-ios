@@ -1,21 +1,21 @@
 PODS:
-  - CryptoKit (0.1.0)
+  - HSCryptoKit (0.1.0)
 
 DEPENDENCIES:
-  - CryptoKit (from `https://github.com/horizontalsystems/crypto-kit-ios`)
+  - HSCryptoKit (from `https://github.com/horizontalsystems/crypto-kit-ios`)
 
 EXTERNAL SOURCES:
-  CryptoKit:
+  HSCryptoKit:
     :git: https://github.com/horizontalsystems/crypto-kit-ios
 
 CHECKOUT OPTIONS:
-  CryptoKit:
-    :commit: 63628c9e60da3172e2e48b61cd16ea7e0691921f
+  HSCryptoKit:
+    :commit: 194cdd408f6a1ce14fe12970298600bcbc0074f7
     :git: https://github.com/horizontalsystems/crypto-kit-ios
 
 SPEC CHECKSUMS:
-  CryptoKit: 2e48694f3554577affc9f55b772eba1e63a5ad32
+  HSCryptoKit: 87ee986be4d760cfa711376b1a715c608a5fd237
 
-PODFILE CHECKSUM: 35c0f55acffa1fbeba3f496b4ed98b8befc3bcf0
+PODFILE CHECKSUM: 61b8ccb3eb70894e36fc99804d8acf26e037abc2
 
 COCOAPODS: 1.6.0.beta.1

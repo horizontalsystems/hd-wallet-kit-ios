@@ -1,5 +1,5 @@
 import Foundation
-import CryptoKit
+import HSCryptoKit
 
 public struct Mnemonic {
     public enum Strength : Int {

@@ -3,6 +3,6 @@ use_frameworks!
 
 inhibit_all_warnings!
 
-target :HDWalletKit do
-  pod "CryptoKit", git: "https://github.com/horizontalsystems/crypto-kit-ios"
+target :HSHDWalletKit do
+  pod "HSCryptoKit", git: "https://github.com/horizontalsystems/crypto-kit-ios"
 end
