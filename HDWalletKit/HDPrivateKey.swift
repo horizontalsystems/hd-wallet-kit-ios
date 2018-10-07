@@ -8,7 +8,7 @@ public class HDPrivateKey {
     let fingerprint: UInt32
     let childIndex: UInt32
 
-    let raw: Data
+    public let raw: Data
     let chainCode: Data
 
     init(privateKey: Data, chainCode: Data, xPrivKey: UInt32, xPubKey: UInt32, depth: UInt8, fingerprint: UInt32, childIndex: UInt32) {
