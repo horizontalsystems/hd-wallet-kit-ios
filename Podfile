@@ -4,5 +4,5 @@ use_frameworks!
 inhibit_all_warnings!
 
 target :HSHDWalletKit do
-  pod "HSCryptoKit"
+  pod "HSCryptoKit", '~> 1.0.1'
 end

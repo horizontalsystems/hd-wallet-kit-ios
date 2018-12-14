@@ -24,6 +24,8 @@
 		11B35B2745FFB89D4D241128 /* Mnemonic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mnemonic.swift; sourceTree = "<group>"; };
 		11B35C5101D9EB96E9B4271B /* HDPrivateKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDPrivateKey.swift; sourceTree = "<group>"; };
 		11B35D68EBB7F4D7F6F47CFF /* HDWallet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDWallet.swift; sourceTree = "<group>"; };
+		867201358DF48ECB84032964 /* Pods-HSHDWalletKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HSHDWalletKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-HSHDWalletKit/Pods-HSHDWalletKit.release.xcconfig"; sourceTree = "<group>"; };
+		97E51A82B3581D16DE2CF3EB /* Pods-HSHDWalletKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HSHDWalletKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HSHDWalletKit/Pods-HSHDWalletKit.debug.xcconfig"; sourceTree = "<group>"; };
 		9D6EC56635A127EFDF4E533E /* Pods-HSHDWalletKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HSHDWalletKit.release.xcconfig"; path = "Target Support Files/Pods-HSHDWalletKit/Pods-HSHDWalletKit.release.xcconfig"; sourceTree = "<group>"; };
 		D3817590216A1083001FA894 /* HSHDWalletKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HSHDWalletKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3817593216A1083001FA894 /* HSHDWalletKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSHDWalletKit.h; sourceTree = "<group>"; };
@@ -70,6 +72,8 @@
 			children = (
 				EE55DA979E257488D710D004 /* Pods-HSHDWalletKit.debug.xcconfig */,
 				9D6EC56635A127EFDF4E533E /* Pods-HSHDWalletKit.release.xcconfig */,
+				97E51A82B3581D16DE2CF3EB /* Pods-HSHDWalletKit.debug.xcconfig */,
+				867201358DF48ECB84032964 /* Pods-HSHDWalletKit.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -343,7 +347,7 @@
 		};
 		D3817599216A1083001FA894 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EE55DA979E257488D710D004 /* Pods-HSHDWalletKit.debug.xcconfig */;
+			baseConfigurationReference = 97E51A82B3581D16DE2CF3EB /* Pods-HSHDWalletKit.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -371,7 +375,7 @@
 		};
 		D381759A216A1083001FA894 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9D6EC56635A127EFDF4E533E /* Pods-HSHDWalletKit.release.xcconfig */;
+			baseConfigurationReference = 867201358DF48ECB84032964 /* Pods-HSHDWalletKit.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
