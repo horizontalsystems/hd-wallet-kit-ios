@@ -34,8 +34,8 @@ public class HDPrivateKey {
         self.init(privateKey: privateKey, chainCode: chainCode, xPrivKey: xPrivKey, xPubKey: xPubKey)
     }
 
-    public func publicKey() -> HDPublicKey {
-        return HDPublicKey(privateKey: self, chainCode: chainCode, xPubKey: xPubKey, depth: depth, fingerprint: fingerprint, childIndex: childIndex)
+    public func publicKey(compressed: Bool = true) -> HDPublicKey {
+        return HDPublicKey(privateKey: self, chainCode: chainCode, xPubKey: xPubKey, depth: depth, fingerprint: fingerprint, childIndex: childIndex, compressed: compressed)
     }
 
     func extended() -> String {
