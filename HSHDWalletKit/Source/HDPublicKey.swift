@@ -10,18 +10,18 @@ public class HDPublicKey {
     public let raw: Data
     let chainCode: Data
 
-    init(privateKey: HDPrivateKey, xPubKey: UInt32) {
+    init(privateKey: HDPrivateKey, xPubKey: UInt32, compressed: Bool = true) {
         self.xPubKey = xPubKey
-        self.raw = HDPublicKey.from(privateKey: privateKey.raw, compression: true)
+        self.raw = HDPublicKey.from(privateKey: privateKey.raw, compression: compressed)
         self.chainCode = privateKey.chainCode
         self.depth = 0
         self.fingerprint = 0
         self.childIndex = 0
     }
 
-    init(privateKey: HDPrivateKey, chainCode: Data, xPubKey: UInt32, depth: UInt8, fingerprint: UInt32, childIndex: UInt32) {
+    init(privateKey: HDPrivateKey, chainCode: Data, xPubKey: UInt32, depth: UInt8, fingerprint: UInt32, childIndex: UInt32, compressed: Bool) {
         self.xPubKey = xPubKey
-        self.raw = HDPublicKey.from(privateKey: privateKey.raw, compression: true)
+        self.raw = HDPublicKey.from(privateKey: privateKey.raw, compression: compressed)
         self.chainCode = chainCode
         self.depth = depth
         self.fingerprint = fingerprint

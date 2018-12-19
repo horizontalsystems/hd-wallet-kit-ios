@@ -20,5 +20,5 @@ Pod::Spec.new do |spec|
   spec.pod_target_xcconfig = { 'SWIFT_WHOLE_MODULE_OPTIMIZATION' => 'YES',
                                'APPLICATION_EXTENSION_API_ONLY' => 'YES' }
 
-  spec.dependency 'HSCryptoKit', '~> 1.0.1' 
+  spec.dependency 'HSCryptoKit', '~> 1.1.0' 
 end
