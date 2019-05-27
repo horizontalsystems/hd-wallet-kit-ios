@@ -14,7 +14,7 @@ public class HDPrivateKey {
     init(privateKey: Data, chainCode: Data, xPrivKey: UInt32, xPubKey: UInt32, depth: UInt8, fingerprint: UInt32, childIndex: UInt32) {
         let zeros = privateKey.count < 32 ? [UInt8](repeating: 0, count: 32 - privateKey.count) : []
 
-        self.raw = Data(bytes: zeros) + privateKey
+        self.raw = Data(zeros) + privateKey
         self.chainCode = chainCode
         self.xPrivKey = xPrivKey
         self.xPubKey = xPubKey

@@ -150,7 +150,7 @@
 				TargetAttributes = {
 					D381758F216A1083001FA894 = {
 						CreatedOnToolsVersion = 10.0;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -347,7 +347,7 @@
 		};
 		D3817599216A1083001FA894 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 97E51A82B3581D16DE2CF3EB /* Pods-HSHDWalletKit.debug.xcconfig */;
+			baseConfigurationReference = EE55DA979E257488D710D004 /* Pods-HSHDWalletKit.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -368,14 +368,14 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		D381759A216A1083001FA894 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 867201358DF48ECB84032964 /* Pods-HSHDWalletKit.release.xcconfig */;
+			baseConfigurationReference = 9D6EC56635A127EFDF4E533E /* Pods-HSHDWalletKit.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -395,7 +395,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "io.horizontalsystems.hd-wallet-kit";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -1,16 +1,16 @@
 PODS:
-  - HSCryptoKit (1.3.0)
+  - HSCryptoKit (1.4.0)
 
 DEPENDENCIES:
-  - HSCryptoKit (~> 1.3.0)
+  - HSCryptoKit (~> 1.4)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - HSCryptoKit
 
 SPEC CHECKSUMS:
-  HSCryptoKit: 564a3888691658cba58aa60f7d037654fd3c6fb0
+  HSCryptoKit: b57163713287e08f0cdd9ac40165e77b7bdc7e66
 
-PODFILE CHECKSUM: 7d0bfc91008dc78054aef8a5a6f32e0862b97474
+PODFILE CHECKSUM: b35b510551bfa92706673e624685777a840e4a77
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.7.0

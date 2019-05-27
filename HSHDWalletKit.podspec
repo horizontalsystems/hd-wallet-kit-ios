@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name = 'HSHDWalletKit'
-  spec.version = '1.0.4'
+  spec.version = '1.1'
   spec.summary = 'HD Wallet library for Swift'
   spec.description = <<-DESC
                        HD Wallet library that makes possible generating and validating mnemonic phrases. Also it can generates public / private keys for HD keychain.
@@ -15,10 +15,9 @@ Pod::Spec.new do |spec|
   spec.source = { git: 'https://github.com/horizontalsystems/hd-wallet-kit-ios.git', tag: "#{spec.version}" }
   spec.source_files = 'HSHDWalletKit/**/*.{h,m,swift}'
   spec.ios.deployment_target = '11.0'
-  spec.swift_version = '4.1'
+  spec.swift_version = '5'
 
-  spec.pod_target_xcconfig = { 'SWIFT_WHOLE_MODULE_OPTIMIZATION' => 'YES',
-                               'APPLICATION_EXTENSION_API_ONLY' => 'YES' }
+  spec.pod_target_xcconfig = { 'APPLICATION_EXTENSION_API_ONLY' => 'YES' }
 
-  spec.dependency 'HSCryptoKit', '~> 1.3.0' 
+  spec.dependency 'HSCryptoKit', '~> 1.4'
 end
