@@ -65,10 +65,11 @@ public struct Mnemonic {
         return seed
     }
 
-    public static func validate(words: [String]) throws {
+    public static func validate(words: [String], strength: Strength = .default) throws {
         let set = Set(words)
+        let requiredWordsCount = (strength.rawValue / 32) * 3
 
-        guard set.count == 12 else {
+        guard set.count == requiredWordsCount else {
             throw ValidationError.invalidWordsCount
         }
 
