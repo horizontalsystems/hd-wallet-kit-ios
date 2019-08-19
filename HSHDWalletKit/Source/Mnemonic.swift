@@ -66,17 +66,16 @@ public struct Mnemonic {
     }
 
     public static func validate(words: [String], strength: Strength = .default) throws {
-        let set = Set(words)
         let requiredWordsCount = (strength.rawValue / 32) * 3
 
-        guard set.count == requiredWordsCount else {
+        guard words.count == requiredWordsCount else {
             throw ValidationError.invalidWordsCount
         }
 
         let wordsList = WordList.english.map(String.init)
 
-        for word in set {
-            if word == "" || !wordsList.contains(word) {
+        for word in words {
+            guard wordsList.contains(word) else {
                 throw ValidationError.invalidWords
             }
         }
