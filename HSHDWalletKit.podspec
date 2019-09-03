@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name = 'HSHDWalletKit'
-  spec.version = '1.1.1'
+  spec.version = '1.2.0'
   spec.summary = 'HD Wallet library for Swift'
   spec.description = <<-DESC
                        HD Wallet library that makes possible generating and validating mnemonic phrases. Also it can generates public / private keys for HD keychain.

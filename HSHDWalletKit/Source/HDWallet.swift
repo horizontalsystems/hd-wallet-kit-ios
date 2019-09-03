@@ -8,12 +8,12 @@ public class HDWallet {
     private let coinType: UInt32
     public var gapLimit: Int
 
-    public init(seed: Data, coinType: UInt32, xPrivKey: UInt32, xPubKey: UInt32, gapLimit: Int = 5) {
+    public init(seed: Data, coinType: UInt32, xPrivKey: UInt32, xPubKey: UInt32, gapLimit: Int = 5, purpose: Purpose = .bip44) {
         self.seed = seed
         self.gapLimit = gapLimit
 
         keychain = HDKeychain(seed: seed, xPrivKey: xPrivKey, xPubKey: xPubKey)
-        purpose = 44
+        self.purpose = purpose.rawValue
         self.coinType = coinType
     }
 
