@@ -1,5 +1,5 @@
 import Foundation
-import HSCryptoKit
+import OpenSslKit
 
 public struct Mnemonic {
     public enum Strength : Int {
@@ -42,7 +42,7 @@ public struct Mnemonic {
         let list = wordList(for: language)
         var bin = String(entropy.flatMap { ("00000000" + String($0, radix:2)).suffix(8) })
 
-        let hash = CryptoKit.sha256(entropy)
+        let hash = Kit.sha256(entropy)
         let bits = entropy.count * 8
         let cs = bits / 32
 
@@ -61,7 +61,7 @@ public struct Mnemonic {
     public static func seed(mnemonic m: [String], passphrase: String = "") -> Data {
         let mnemonic = m.joined(separator: " ").decomposedStringWithCompatibilityMapping.data(using: .utf8)!
         let salt = ("mnemonic" + passphrase).decomposedStringWithCompatibilityMapping.data(using: .utf8)!
-        let seed = CryptoKit.deriveKey(password: mnemonic, salt: salt, iterations: 2048, keyLength: 64)
+        let seed = Kit.deriveKey(password: mnemonic, salt: salt, iterations: 2048, keyLength: 64)
         return seed
     }
 
