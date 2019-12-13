@@ -1,0 +1,27 @@
+PODS:
+  - HdWalletKit.swift (1.4):
+    - OpenSslKit.swift (~> 1.0)
+    - Secp256k1Kit.swift (~> 1.0)
+  - OpenSslKit.swift (1.0)
+  - Secp256k1Kit.swift (1.0)
+
+DEPENDENCIES:
+  - HdWalletKit.swift (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - OpenSslKit.swift
+    - Secp256k1Kit.swift
+
+EXTERNAL SOURCES:
+  HdWalletKit.swift:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  HdWalletKit.swift: 45af883b0aa722a56ed9a0de82121ba6c43cce3f
+  OpenSslKit.swift: 6e699e0d69fae6b306eaca0b8971c59bc45546ab
+  Secp256k1Kit.swift: 93b1bfbb8909c12605666cc3b1e59d1d1fde7322
+
+PODFILE CHECKSUM: 4f77ee4b57becfec9c612c800bce219d9fbee907
+
+COCOAPODS: 1.8.4

@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:HDWalletKit.xcodeproj">
+      location = "self:HdWalletKit.xcodeproj">
    </FileRef>
 </Workspace>
