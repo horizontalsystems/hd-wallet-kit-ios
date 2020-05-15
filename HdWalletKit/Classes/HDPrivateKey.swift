@@ -63,6 +63,29 @@ public class HDPrivateKey {
         return HDPrivateKey(privateKey: derivedKey.privateKey!, chainCode: derivedKey.chainCode, xPrivKey: xPrivKey, xPubKey: xPubKey, depth: derivedKey.depth, fingerprint: derivedKey.fingerprint, childIndex: derivedKey.childIndex)
     }
 
+    func derivedNonHardenedPublicKeys(at indices: Range<UInt32>) throws -> [HDPublicKey] {
+        guard let firstIndex = indices.first, let lastIndex = indices.last else {
+            return []
+        }
+
+        if (0x80000000 & firstIndex) != 0 && (0x80000000 & lastIndex) != 0 {
+            fatalError("invalid child index")
+        }
+
+        let hdKey = HDKey(privateKey: nil, publicKey: publicKey().raw, chainCode: chainCode, depth: depth, fingerprint: fingerprint, childIndex: childIndex)
+
+        var keys = [HDPublicKey]()
+
+        for i in indices {
+            guard let key = Kit.derivedHDKey(hdKey: hdKey, at: i, hardened: false), let publicKey = key.publicKey else {
+                throw DerivationError.derivateionFailed
+            }
+
+            keys.append(HDPublicKey(raw: publicKey, chainCode: chainCode, xPubKey: xPubKey, depth: key.depth, fingerprint: key.fingerprint, childIndex: key.childIndex))
+        }
+
+        return keys
+    }
 }
 
 enum DerivationError : Error {

@@ -18,16 +18,19 @@ public class HDWallet {
     }
 
     public func privateKey(account: Int, index: Int, chain: Chain) throws -> HDPrivateKey {
-        return try privateKey(path: "m/\(purpose)'/\(coinType)'/\(account)'/\(chain.rawValue)/\(index)")
+        try privateKey(path: "m/\(purpose)'/\(coinType)'/\(account)'/\(chain.rawValue)/\(index)")
     }
 
     public func privateKey(path: String) throws -> HDPrivateKey {
-        let privateKey = try keychain.derivedKey(path: path)
-        return privateKey
+        try keychain.derivedKey(path: path)
     }
 
     public func publicKey(account: Int, index: Int, chain: Chain) throws -> HDPublicKey {
-        return try privateKey(account: account, index: index, chain: chain).publicKey()
+        try privateKey(account: account, index: index, chain: chain).publicKey()
+    }
+
+    public func publicKeys(account: Int, indices: Range<UInt32>, chain: Chain) throws -> [HDPublicKey] {
+        try keychain.derivedNonHardenedPublicKeys(path: "m/\(purpose)'/\(coinType)'/\(account)'/\(chain.rawValue)", indices: indices)
     }
 
     public enum Chain : Int {
