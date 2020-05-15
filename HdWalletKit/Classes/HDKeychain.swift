@@ -53,4 +53,15 @@ final class HDKeychain {
         }
         return key
     }
+
+    func derivedNonHardenedPublicKeys(path: String, indices: Range<UInt32>) throws -> [HDPublicKey] {
+        guard indices.count > 0 else {
+            return []
+        }
+
+        let key = try derivedKey(path: path)
+
+        return try key.derivedNonHardenedPublicKeys(at: indices)
+    }
+
 }
