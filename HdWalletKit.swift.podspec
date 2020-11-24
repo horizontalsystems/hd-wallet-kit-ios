@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name             = 'HdWalletKit.swift'
   s.module_name      = 'HdWalletKit'
-  s.version          = '1.5'
+  s.version          = '1.5.1'
   s.summary          = 'HD Wallet library for Swift.'
 
   s.description      = <<-DESC
@@ -21,8 +21,12 @@ HD Wallet library that makes possible generating and validating mnemonic phrases
 
   s.requires_arc = true
 
-  s.pod_target_xcconfig = { 'APPLICATION_EXTENSION_API_ONLY' => 'YES' }
-
   s.dependency 'OpenSslKit.swift', '~> 1.0'
   s.dependency 'Secp256k1Kit.swift', '~> 1.0'
+
+  s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
+  s.pod_target_xcconfig = { 
+    'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64', 
+    'APPLICATION_EXTENSION_API_ONLY' => 'YES' 
+  }
 end
