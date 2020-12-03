@@ -2,12 +2,21 @@ import Foundation
 import OpenSslKit
 
 public struct Mnemonic {
-    public enum Strength : Int {
-        case `default` = 128
-        case low = 160
-        case medium = 192
-        case high = 224
-        case veryHigh = 256
+
+    public enum WordCount: Int {
+        case twelve = 12
+        case fifteen = 15
+        case eighteen = 18
+        case twentyOne = 21
+        case twentyFour = 24
+
+        var bitLength: Int {
+            self.rawValue / 3 * 32
+        }
+
+        var checksumLength: Int {
+            self.rawValue / 3
+        }
     }
 
     public enum Language {
@@ -23,11 +32,16 @@ public struct Mnemonic {
 
     public enum ValidationError: Error {
         case invalidWordsCount
-        case invalidWords
+        case invalidWord(word: String)
+        case invalidChecksum
     }
 
-    public static func generate(strength: Strength = .default, language: Language = .english) throws -> [String] {
-        let byteCount = strength.rawValue / 8
+    enum MnemonicError : Error {
+        case randomBytesError
+    }
+
+    public static func generate(wordCount: WordCount = .twelve, language: Language = .english) throws -> [String] {
+        let byteCount = wordCount.bitLength / 8
         var bytes = Data(count: byteCount)
 
         let status = bytes.withUnsafeMutableBytes {
@@ -65,23 +79,50 @@ public struct Mnemonic {
         return seed
     }
 
-    public static func validate(words: [String], strength: Strength = .default) throws {
-        let requiredWordsCount = (strength.rawValue / 32) * 3
-
-        guard words.count == requiredWordsCount else {
+    public static func validate(words: [String], language: Language = .english) throws {
+        guard let wordCount = WordCount(rawValue: words.count) else {
             throw ValidationError.invalidWordsCount
         }
 
-        let wordsList = WordList.english.map(String.init)
+        let list = wordList(for: language).map(String.init)
+
+        // generate indices array
+        var seedBits = ""
 
         for word in words {
-            guard wordsList.contains(word) else {
-                throw ValidationError.invalidWords
+            guard let index = list.firstIndex(of: word) else {
+                throw ValidationError.invalidWord(word: word)
             }
+
+            let binaryString = String(index, radix: 2).pad(toSize: 11)
+
+            seedBits.append(contentsOf: binaryString)
+        }
+
+        let checksumLength = words.count / 3
+
+        guard checksumLength == wordCount.checksumLength else {
+            throw ValidationError.invalidChecksum
+        }
+
+        let dataBitsLength = seedBits.count - checksumLength
+
+        let dataBits = String(seedBits.prefix(dataBitsLength))
+        let checksumBits = String(seedBits.suffix(checksumLength))
+
+        guard let dataBytes = dataBits.bitStringToBytes() else {
+            throw ValidationError.invalidChecksum
+        }
+
+        let hash = Kit.sha256(dataBytes)
+        let hashBits = hash.toBitArray().joined(separator: "").prefix(checksumLength)
+
+        guard hashBits == checksumBits else {
+            throw ValidationError.invalidChecksum
         }
     }
 
-    private static func wordList(for language: Language) -> [String.SubSequence] {
+    public static func wordList(for language: Language) -> [String.SubSequence] {
         switch language {
         case .english:
             return WordList.english
@@ -101,8 +142,4 @@ public struct Mnemonic {
             return WordList.italian
         }
     }
-}
-
-enum MnemonicError : Error {
-    case randomBytesError
 }
