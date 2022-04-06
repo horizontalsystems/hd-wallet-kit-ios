@@ -3,13 +3,13 @@ import OpenSslKit
 import Secp256k1Kit
 
 public class HDPublicKey {
-    let xPubKey: UInt32
-    let depth: UInt8
-    let fingerprint: UInt32
-    let childIndex: UInt32
+    public let xPubKey: UInt32
+    public let depth: UInt8
+    public let fingerprint: UInt32
+    public let childIndex: UInt32
 
     public let raw: Data
-    let chainCode: Data
+    public let chainCode: Data
 
     init(privateKey: HDPrivateKey, xPubKey: UInt32, compressed: Bool = true) {
         self.xPubKey = xPubKey
@@ -38,7 +38,7 @@ public class HDPublicKey {
         self.childIndex = childIndex
     }
 
-    func extended() -> String {
+    public func extended() -> String {
         var data = Data()
         data += xPubKey.bigEndian
         data += depth.littleEndian
