@@ -1,13 +1,13 @@
 import Foundation
 
-final class HDKeychain {
+public final class HDKeychain {
     let privateKey: HDPrivateKey
 
     init(privateKey: HDPrivateKey) {
         self.privateKey = privateKey
     }
 
-    convenience init(seed: Data, xPrivKey: UInt32, xPubKey: UInt32) {
+    public convenience init(seed: Data, xPrivKey: UInt32, xPubKey: UInt32) {
         self.init(privateKey: HDPrivateKey(seed: seed, xPrivKey: xPrivKey, xPubKey: xPubKey))
     }
     /// Parses the BIP32 path and derives the chain of keychains accordingly.
@@ -29,7 +29,7 @@ final class HDKeychain {
     /// "m / 0 / 1" (contains spaces)
     /// "m/b/c" (alphabetical characters instead of numerical indexes)
     /// "m/1.2^3" (contains illegal characters)
-    func derivedKey(path: String) throws -> HDPrivateKey {
+    public func derivedKey(path: String) throws -> HDPrivateKey {
         var key = privateKey
 
         var path = path
