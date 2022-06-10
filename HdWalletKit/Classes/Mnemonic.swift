@@ -19,7 +19,7 @@ public struct Mnemonic {
         }
     }
 
-    public enum Language {
+    public enum Language: CaseIterable {
         case english
         case japanese
         case korean
@@ -28,11 +28,13 @@ public struct Mnemonic {
         case traditionalChinese
         case french
         case italian
+        case czech
+        case portuguese
     }
 
     public enum ValidationError: Error {
         case invalidWordsCount
-        case invalidWord(word: String)
+        case invalidWord
         case invalidChecksum
     }
 
@@ -79,24 +81,29 @@ public struct Mnemonic {
         return seed
     }
 
-    public static func validate(words: [String], language: Language = .english) throws {
-        guard let wordCount = WordCount(rawValue: words.count) else {
-            throw ValidationError.invalidWordsCount
-        }
-
-        let list = wordList(for: language).map(String.init)
-
-        // generate indices array
+    private static func seedBits(words: [String], list: [String]) -> String? {
         var seedBits = ""
-
         for word in words {
             guard let index = list.firstIndex(of: word) else {
-                throw ValidationError.invalidWord(word: word)
+                return nil
             }
 
             let binaryString = String(index, radix: 2).pad(toSize: 11)
 
             seedBits.append(contentsOf: binaryString)
+        }
+        return seedBits
+    }
+
+    public static func validate(words: [String]) throws {
+        guard let wordCount = WordCount(rawValue: words.count) else {
+            throw ValidationError.invalidWordsCount
+        }
+
+        // generate indices array
+        let mnemonicDictionariesArray: [[String]] = Language.allCases.map { wordList(for: $0).map(String.init) }
+        guard let seedBits = (mnemonicDictionariesArray.flatMap { seedBits(words: words, list: $0) }).first else {
+            throw ValidationError.invalidWord
         }
 
         let checksumLength = words.count / 3
@@ -140,6 +147,10 @@ public struct Mnemonic {
             return WordList.french
         case .italian:
             return WordList.italian
+        case .czech:
+            return WordList.czech
+        case .portuguese:
+            return WordList.portuguese
         }
     }
 }
