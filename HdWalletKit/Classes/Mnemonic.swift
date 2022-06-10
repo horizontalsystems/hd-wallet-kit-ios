@@ -34,7 +34,7 @@ public struct Mnemonic {
 
     public enum ValidationError: Error {
         case invalidWordsCount
-        case invalidWord
+        case invalidWord(index: Int)
         case invalidChecksum
     }
 
@@ -81,11 +81,11 @@ public struct Mnemonic {
         return seed
     }
 
-    private static func seedBits(words: [String], list: [String]) -> String? {
+    private static func seedBits(words: [String], list: [String]) throws -> String {
         var seedBits = ""
-        for word in words {
+        try words.enumerated().forEach { (index, word) in
             guard let index = list.firstIndex(of: word) else {
-                return nil
+                throw ValidationError.invalidWord(index: index)
             }
 
             let binaryString = String(index, radix: 2).pad(toSize: 11)
@@ -95,17 +95,28 @@ public struct Mnemonic {
         return seedBits
     }
 
+    private static func seedBitsForLanguage(words: [String]) throws -> String {
+        var wrongWordIndex: Int = 0
+
+        for language in (Language.allCases.map { wordList(for: $0).map(String.init) }) {
+            do {
+                return try seedBits(words: words, list: language)
+            } catch {
+                if case let ValidationError.invalidWord(index) = error {
+                    wrongWordIndex = wrongWordIndex < index ? index : wrongWordIndex
+                }
+            }
+        }
+
+        throw ValidationError.invalidWord(index: wrongWordIndex)
+    }
+
     public static func validate(words: [String]) throws {
         guard let wordCount = WordCount(rawValue: words.count) else {
             throw ValidationError.invalidWordsCount
         }
 
-        // generate indices array
-        let mnemonicDictionariesArray: [[String]] = Language.allCases.map { wordList(for: $0).map(String.init) }
-        guard let seedBits = (mnemonicDictionariesArray.flatMap { seedBits(words: words, list: $0) }).first else {
-            throw ValidationError.invalidWord
-        }
-
+        let seedBits = try seedBitsForLanguage(words: words)
         let checksumLength = words.count / 3
 
         guard checksumLength == wordCount.checksumLength else {
