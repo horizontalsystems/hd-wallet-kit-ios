@@ -3,7 +3,7 @@ import OpenSslKit
 
 public struct Mnemonic {
 
-    public enum WordCount: Int {
+    public enum WordCount: Int, CaseIterable {
         case twelve = 12
         case fifteen = 15
         case eighteen = 18
@@ -17,6 +17,7 @@ public struct Mnemonic {
         var checksumLength: Int {
             self.rawValue / 3
         }
+
     }
 
     public enum Language: CaseIterable {
@@ -33,7 +34,7 @@ public struct Mnemonic {
     }
 
     public enum ValidationError: Error {
-        case invalidWordsCount
+        case invalidWords(count: Int)
         case invalidWord(index: Int)
         case invalidChecksum
     }
@@ -113,16 +114,11 @@ public struct Mnemonic {
 
     public static func validate(words: [String]) throws {
         guard let wordCount = WordCount(rawValue: words.count) else {
-            throw ValidationError.invalidWordsCount
+            throw ValidationError.invalidWords(count: words.count)
         }
 
         let seedBits = try seedBitsForLanguage(words: words)
-        let checksumLength = words.count / 3
-
-        guard checksumLength == wordCount.checksumLength else {
-            throw ValidationError.invalidChecksum
-        }
-
+        let checksumLength = wordCount.checksumLength
         let dataBitsLength = seedBits.count - checksumLength
 
         let dataBits = String(seedBits.prefix(dataBitsLength))
